@@ -178,8 +178,6 @@ function App() {
   
   const [params, setParams] = useState<ThreadParams>({
     topic: '',
-    tone: 'SANTAI',
-    length: 'SEDANG',
   });
   const [isGenerating, setIsGenerating] = useState(false);
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
@@ -190,7 +188,7 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [timeLeft, setTimeLeft] = useState(900); // 15 minutes in seconds
   const [slotsLeft, setSlotsLeft] = useState(3);
-  const [history, setHistory] = useState<{id: string, topic: string, thread: string[], tone?: string, booster?: ViralBooster, timestamp: number}[]>([]);
+  const [history, setHistory] = useState<{id: string, topic: string, thread: string[], booster?: ViralBooster, timestamp: number}[]>([]);
   const [userApiKey, setUserApiKey] = useState('');
 
   useEffect(() => {
@@ -294,7 +292,6 @@ function App() {
           id: doc.id,
           topic: data.topic,
           thread: data.thread,
-          tone: data.tone,
           booster: data.booster,
           timestamp: data.createdAt?.toMillis() || Date.now()
         };
@@ -307,7 +304,7 @@ function App() {
     return () => unsubscribe();
   }, [user, isAuthReady]);
 
-  const saveToHistory = async (topic: string, thread: string[], tone?: string, booster?: ViralBooster) => {
+  const saveToHistory = async (topic: string, thread: string[], booster?: ViralBooster) => {
     if (!user) return;
 
     const threadId = Date.now().toString();
@@ -318,7 +315,6 @@ function App() {
         uid: user.uid,
         topic,
         thread,
-        tone: tone || 'SANTAI',
         booster: booster || null,
         createdAt: serverTimestamp()
       });
@@ -339,8 +335,8 @@ function App() {
     }
   };
 
-  const loadFromHistory = (item: {topic: string, thread: string[], tone?: any, booster?: ViralBooster}) => {
-    setParams({ topic: item.topic, tone: item.tone || 'SANTAI' });
+  const loadFromHistory = (item: {topic: string, thread: string[], booster?: ViralBooster}) => {
+    setParams({ topic: item.topic });
     setThread(item.thread);
     setBooster(item.booster || null);
   };
@@ -408,7 +404,7 @@ function App() {
         const sanitizedTweets = (result.tweets || []).map(t => t.trim());
         setThread(sanitizedTweets);
         setBooster(result.booster || null);
-        saveToHistory(params.topic, sanitizedTweets, params.tone, result.booster);
+        saveToHistory(params.topic, sanitizedTweets, result.booster);
       }
     } catch (err: any) {
       const msg = err.message || 'Terjadi kesalahan sistem';
@@ -471,7 +467,7 @@ function App() {
   };
 
   const reset = () => {
-    setParams({ topic: '', tone: 'SANTAI', length: 'SEDANG' });
+    setParams({ topic: '' });
     setThread([]);
     setCoverImage(null);
     setBooster(null);
@@ -1078,47 +1074,6 @@ function App() {
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-gray-400 ml-1">Pilih Tone</label>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    {(['SANTAI', 'EDUKATIF', 'VIRAL', 'STORYTELLING', 'HOT TAKE', 'INFLUENCER', 'CAREER HACK'] as const).map((t) => (
-                      <button
-                        key={t}
-                        onClick={() => setParams({ ...params, tone: t })}
-                        className={`py-2 px-3 rounded-xl text-[10px] font-bold transition-all border-2 ${
-                          params.tone === t 
-                            ? 'border-[#1DA1F2] bg-[#1DA1F2]/5 text-[#1DA1F2]' 
-                            : 'border-gray-100 text-gray-400 hover:border-gray-200'
-                        }`}
-                      >
-                        {t}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-gray-400 ml-1">Panjang Thread</label>
-                  <div className="grid grid-cols-3 gap-2">
-                    {(['PENDEK', 'SEDANG', 'PANJANG'] as const).map((l) => (
-                      <button
-                        key={l}
-                        onClick={() => setParams({ ...params, length: l })}
-                        className={`py-2 px-1 rounded-xl text-[10px] font-bold transition-all border-2 ${
-                          params.length === l 
-                            ? 'border-[#1DA1F2] bg-[#1DA1F2]/5 text-[#1DA1F2]' 
-                            : 'border-gray-100 text-gray-400 hover:border-gray-200'
-                        }`}
-                      >
-                        {l}
-                        <span className="block text-[8px] opacity-60">
-                          {l === 'PENDEK' ? '3 Tweet' : l === 'SEDANG' ? '5 Tweet' : '10 Tweet'}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
                 <button 
                   onClick={handleGenerate}
                   disabled={isGenerating || !params.topic}
@@ -1175,11 +1130,6 @@ function App() {
                           <Clock className="w-3 h-3" />
                           {new Date(item.timestamp).toLocaleDateString('id-ID', { hour: '2-digit', minute: '2-digit' })}
                         </div>
-                        {item.tone && (
-                          <span className="text-[#1DA1F2] bg-[#1DA1F2]/5 px-2 py-0.5 rounded-md">
-                            {item.tone}
-                          </span>
-                        )}
                       </div>
                     </div>
                   ))}
