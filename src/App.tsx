@@ -179,6 +179,7 @@ function App() {
   
   const [params, setParams] = useState<ThreadParams>({
     topic: '',
+    length: 'PENDEK',
   });
   const [isGenerating, setIsGenerating] = useState(false);
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
@@ -189,7 +190,7 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [timeLeft, setTimeLeft] = useState(900); // 15 minutes in seconds
   const [slotsLeft, setSlotsLeft] = useState(3);
-  const [history, setHistory] = useState<{id: string, topic: string, thread: string[], booster?: ViralBooster, timestamp: number}[]>([]);
+  const [history, setHistory] = useState<{id: string, topic: string, length?: string, thread: string[], booster?: ViralBooster, timestamp: number}[]>([]);
   const [userApiKey, setUserApiKey] = useState('');
 
   useEffect(() => {
@@ -292,6 +293,7 @@ function App() {
         return {
           id: doc.id,
           topic: data.topic,
+          length: data.length,
           thread: data.thread,
           booster: data.booster,
           timestamp: data.createdAt?.toMillis() || Date.now()
@@ -305,7 +307,7 @@ function App() {
     return () => unsubscribe();
   }, [user, isAuthReady]);
 
-  const saveToHistory = async (topic: string, thread: string[], booster?: ViralBooster) => {
+  const saveToHistory = async (topic: string, length: string | undefined, thread: string[], booster?: ViralBooster) => {
     if (!user) return;
 
     const threadId = Date.now().toString();
@@ -315,6 +317,7 @@ function App() {
       await setDoc(threadRef, {
         uid: user.uid,
         topic,
+        length: length || 'PENDEK',
         thread,
         booster: booster || null,
         createdAt: serverTimestamp()
@@ -336,8 +339,8 @@ function App() {
     }
   };
 
-  const loadFromHistory = (item: {topic: string, thread: string[], booster?: ViralBooster}) => {
-    setParams({ topic: item.topic });
+  const loadFromHistory = (item: {topic: string, length?: string, thread: string[], booster?: ViralBooster}) => {
+    setParams({ topic: item.topic, length: (item.length as any) || 'PENDEK' });
     setThread(item.thread);
     setBooster(item.booster || null);
   };
@@ -405,7 +408,7 @@ function App() {
         const sanitizedTweets = (result.tweets || []).map(t => t.trim());
         setThread(sanitizedTweets);
         setBooster(result.booster || null);
-        saveToHistory(params.topic, sanitizedTweets, result.booster);
+        saveToHistory(params.topic, params.length, sanitizedTweets, result.booster);
       }
     } catch (err: any) {
       const msg = err.message || 'Terjadi kesalahan sistem';
@@ -468,7 +471,7 @@ function App() {
   };
 
   const reset = () => {
-    setParams({ topic: '' });
+    setParams({ topic: '', length: 'PENDEK' });
     setThread([]);
     setCoverImage(null);
     setBooster(null);
@@ -1073,6 +1076,31 @@ function App() {
                     value={params.topic}
                     onChange={(e) => setParams({...params, topic: e.target.value})}
                   />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-gray-400 ml-1">Panjang Thread</label>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { id: 'PENDEK', label: 'PENDEK', desc: '3 Tweet' },
+                      { id: 'PANJANG', label: 'PANJANG', desc: '7 Tweet' }
+                    ].map((opt) => (
+                      <button
+                        key={opt.id}
+                        onClick={() => setParams({ ...params, length: opt.id as any })}
+                        className={`p-3 rounded-xl border-2 transition-all text-left ${
+                          params.length === opt.id 
+                            ? 'border-indigo-600 bg-indigo-50' 
+                            : 'border-gray-100 bg-gray-50 hover:border-gray-200'
+                        }`}
+                      >
+                        <p className={`text-xs font-black ${params.length === opt.id ? 'text-indigo-600' : 'text-gray-500'}`}>
+                          {opt.label}
+                        </p>
+                        <p className="text-[10px] text-gray-400 font-bold">{opt.desc}</p>
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 <button 

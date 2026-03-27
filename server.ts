@@ -21,16 +21,14 @@ GAYA PENULISAN (HUMAN-LIKE):
 PANJANG THREAD (WAJIB DIPATUHI):
 Sesuaikan jumlah tweet berdasarkan pilihan user:
 - PENDEK: 3 tweet
-  → Struktur: Situasi/Hook + Solusi langsung + Insight penutup
-- SEDANG: 5 tweet (default)
-  → Struktur: Situasi/Hook + Kenapa ini masalah + Solusi bernomor (dibagi 2 tweet) + Kenapa works + Insight penutup
-- PANJANG: 10 tweet
-  → Struktur: Situasi/Hook + Kenapa ini masalah + Solusi bernomor (dibagi 4 tweet) + Kenapa works + Contoh nyata + Kemungkinan terburuk vs terbaik + Bonus tip + Pertanyaan ke audiens + CTA follow
+  → Struktur: Situasi/Hook + 1 Isi + CTA/Insight
+- PANJANG: 7 tweet
+  → Struktur: Situasi/Hook + 5 Isi + CTA/Insight
 
 Jika user tidak menyebut panjang, gunakan SEDANG (5 tweet).
 
 Tampilkan pilihan ini di awal output (sebagai metadata, sebelum tweet pertama):
-Panjang dipilih: [PENDEK/SEDANG/PANJANG] ([jumlah] tweet)
+Panjang dipilih: [PENDEK/PANJANG] ([jumlah] tweet)
 
 TONE KHUSUS - INFLUENCER STYLE:
 Jika user memilih tone "INFLUENCER", gunakan gaya berikut:
@@ -120,7 +118,7 @@ const CACHE_TTL = 1000 * 60 * 60; // 1 hour
 
 // API Route for Gemini Generation
 app.post("/api/generate", async (req, res) => {
-  const { topic, tone = 'SANTAI', length = 'SEDANG', apiKey: userApiKey } = req.body;
+  const { topic, tone = 'SANTAI', length = 'PENDEK', apiKey: userApiKey } = req.body;
   
   if (!topic || typeof topic !== 'string') {
     return res.status(400).json({ error: "Topik harus diisi." });
@@ -164,8 +162,7 @@ app.post("/api/generate", async (req, res) => {
 
   const lengthTweetCount = {
     'PENDEK': 3,
-    'SEDANG': 5,
-    'PANJANG': 10
+    'PANJANG': 7
   };
 
   const prompt = `BUAT THREAD VIRAL TENTANG: ${topic}

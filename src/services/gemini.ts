@@ -1,5 +1,6 @@
 export interface ThreadParams {
   topic: string;
+  length?: 'PENDEK' | 'PANJANG';
   apiKey?: string;
 }
 
