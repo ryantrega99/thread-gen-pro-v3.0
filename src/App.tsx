@@ -1018,9 +1018,9 @@ function App() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12">
-          {/* Sidebar / Form */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10">
+          {/* Left Column: Form & History (Desktop) */}
           <aside className="lg:col-span-4 space-y-6 sm:space-y-8">
             {/* Custom API Key Input (Mobile/Tab Only) */}
             <div className="lg:hidden bg-white p-4 sm:p-6 rounded-[24px] sm:rounded-[32px] border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.02)] flex flex-col sm:flex-row items-center gap-4">
@@ -1124,40 +1124,40 @@ function App() {
               </div>
             </div>
 
-            {/* History Section */}
+            {/* History Section (Desktop Only) */}
             {history.length > 0 && (
-              <div className="bg-white p-6 sm:p-8 rounded-[24px] sm:rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100">
-                <div className="flex items-center gap-3 mb-6 sm:mb-8">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-indigo-50 rounded-xl flex items-center justify-center">
-                    <History className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
+              <div className="hidden lg:block bg-white p-6 rounded-[24px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-8 h-8 bg-indigo-50 rounded-xl flex items-center justify-center">
+                    <History className="w-4 h-4 text-indigo-600" />
                   </div>
                   <div>
-                    <h2 className="text-lg sm:text-xl font-bold">Riwayat</h2>
-                    <p className="text-xs sm:text-sm text-gray-400">Thread yang pernah dibuat</p>
+                    <h2 className="text-sm font-bold">Riwayat</h2>
+                    <p className="text-[10px] text-gray-400">Thread sebelumnya</p>
                   </div>
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
                   {history.map((item) => (
                     <div 
                       key={item.id}
                       onClick={() => loadFromHistory(item)}
-                      className="group p-3 sm:p-4 bg-gray-50 hover:bg-gray-100 rounded-xl sm:rounded-2xl cursor-pointer transition-all border border-transparent hover:border-gray-200 relative"
+                      className="group p-3 bg-gray-50 hover:bg-gray-100 rounded-xl cursor-pointer transition-all border border-transparent hover:border-gray-200 relative"
                     >
                       <div className="flex justify-between items-start gap-2">
-                        <p className="text-xs sm:text-sm font-medium text-gray-700 line-clamp-2 pr-6">
+                        <p className="text-[11px] font-medium text-gray-700 line-clamp-2 pr-6">
                           {item.topic}
                         </p>
                         <button 
                           onClick={(e) => deleteHistoryItem(e, item.id)}
-                          className="absolute top-3 right-3 p-1 text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all"
+                          className="absolute top-2 right-2 p-1 text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all"
                         >
-                          <Trash2 className="w-3 h-3 sm:w-4 sm:h-4" />
+                          <Trash2 className="w-3 h-3" />
                         </button>
                       </div>
-                      <div className="mt-2 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider">
+                      <div className="mt-2 flex items-center justify-between text-[9px] font-bold uppercase tracking-wider">
                         <div className="flex items-center gap-2 text-gray-400">
-                          <Clock className="w-3 h-3" />
+                          <Clock className="w-2.5 h-2.5" />
                           {new Date(item.timestamp).toLocaleDateString('id-ID', { hour: '2-digit', minute: '2-digit' })}
                         </div>
                       </div>
@@ -1167,14 +1167,14 @@ function App() {
               </div>
             )}
 
-            {/* Viral Booster Section (Moved to Sidebar) */}
+            {/* Viral Booster Section (Desktop Only - Middle) */}
             <AnimatePresence>
               {booster && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  className="bg-gradient-to-br from-indigo-600 to-violet-600 p-6 sm:p-8 rounded-[24px] sm:rounded-[32px] shadow-[0_20px_40px_rgba(79,70,229,0.2)] text-white space-y-6"
+                  className="hidden lg:block bg-gradient-to-br from-indigo-600 to-violet-600 p-6 sm:p-8 rounded-[24px] sm:rounded-[32px] shadow-[0_20px_40px_rgba(79,70,229,0.2)] text-white space-y-6"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center">
@@ -1240,8 +1240,122 @@ function App() {
             </AnimatePresence>
           </aside>
 
-          {/* Main Content / Preview */}
+          {/* Right Column: Preview & History (Mobile) */}
           <section className="lg:col-span-8 space-y-6 sm:space-y-8">
+            {/* History Section (Mobile/Tab Only) */}
+            {history.length > 0 && (
+              <div className="lg:hidden bg-white p-6 sm:p-8 rounded-[24px] sm:rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100">
+                <div className="flex items-center gap-3 mb-6 sm:mb-8">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-indigo-50 rounded-xl flex items-center justify-center">
+                    <History className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
+                  </div>
+                  <div>
+                    <h2 className="text-lg sm:text-xl font-bold">Riwayat</h2>
+                    <p className="text-xs sm:text-sm text-gray-400">Thread yang pernah dibuat</p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {history.slice(0, 4).map((item) => (
+                    <div 
+                      key={item.id}
+                      onClick={() => loadFromHistory(item)}
+                      className="group p-3 sm:p-4 bg-gray-50 hover:bg-gray-100 rounded-xl sm:rounded-2xl cursor-pointer transition-all border border-transparent hover:border-gray-200 relative"
+                    >
+                      <div className="flex justify-between items-start gap-2">
+                        <p className="text-xs sm:text-sm font-medium text-gray-700 line-clamp-2 pr-6">
+                          {item.topic}
+                        </p>
+                        <button 
+                          onClick={(e) => deleteHistoryItem(e, item.id)}
+                          className="absolute top-3 right-3 p-1 text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all"
+                        >
+                          <Trash2 className="w-3 h-3 sm:w-4 sm:h-4" />
+                        </button>
+                      </div>
+                      <div className="mt-2 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider">
+                        <div className="flex items-center gap-2 text-gray-400">
+                          <Clock className="w-3 h-3" />
+                          {new Date(item.timestamp).toLocaleDateString('id-ID', { hour: '2-digit', minute: '2-digit' })}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Viral Booster Section (Mobile Only) */}
+            <AnimatePresence>
+              {booster && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="lg:hidden bg-gradient-to-br from-indigo-600 to-violet-600 p-6 sm:p-8 rounded-[24px] sm:rounded-[32px] shadow-[0_20px_40px_rgba(79,70,229,0.2)] text-white space-y-6"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center">
+                      <TrendingUp className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-base sm:text-lg font-black uppercase tracking-widest leading-tight">Viral Booster</h3>
+                      <p className="text-white/70 text-[10px] font-medium">Optimalkan jangkauan</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10 space-y-2">
+                      <div className="flex items-center gap-2 text-white/60 text-[9px] font-black uppercase tracking-widest">
+                        <Hash className="w-2.5 h-2.5" />
+                        Hashtag
+                      </div>
+                      <p className="text-xs font-bold leading-relaxed">
+                        {booster.hashtags}
+                      </p>
+                    </div>
+
+                    <div className="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10 space-y-2">
+                      <div className="flex items-center gap-2 text-white/60 text-[9px] font-black uppercase tracking-widest">
+                        <Calendar className="w-2.5 h-2.5" />
+                        Waktu Posting
+                      </div>
+                      <p className="text-xs font-bold leading-relaxed">
+                        {booster.bestTime}
+                      </p>
+                    </div>
+
+                    <div className="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10 space-y-3">
+                      <div className="flex items-center gap-2 text-white/60 text-[9px] font-black uppercase tracking-widest">
+                        <MousePointer2 className="w-2.5 h-2.5" />
+                        Hook Alternatif
+                      </div>
+                      <div className="space-y-3">
+                        {booster.hooks?.map((hook, i) => (
+                          <div key={i} className="flex gap-3 group/hook">
+                            <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center font-black text-[10px] shrink-0">
+                              {i + 1}
+                            </div>
+                            <p className="text-[11px] font-medium leading-relaxed flex-1">
+                              {hook}
+                            </p>
+                            <button 
+                              onClick={() => {
+                                navigator.clipboard.writeText(hook);
+                                showToast('Hook disalin!');
+                              }}
+                              className="p-1.5 bg-white/10 hover:bg-white/30 rounded transition-all self-start"
+                            >
+                              <Copy className="w-2.5 h-2.5" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
             {/* Custom API Key Input (Desktop Only) */}
             <div className="hidden lg:flex bg-white p-4 sm:p-6 rounded-[24px] sm:rounded-[32px] border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.02)] flex-col sm:flex-row items-center gap-4">
               <div className="flex-1 w-full space-y-1">
