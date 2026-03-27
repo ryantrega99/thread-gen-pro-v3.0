@@ -37,13 +37,16 @@ STRUKTUR THREAD (UMUM):
    - Jangan pakai link placeholder jika tidak ada, cukup deskripsi produk yang menggoda.
 
 ATURAN FORMAT & VISUAL RHYTHM (SANGAT KETAT):
+- SETIAP TWEET WAJIB HANYA TERDIRI DARI 3 BARIS TEKS.
+- Baris 1: Hook/Pernyataan pembuka.
+- Baris 2: Detail/Penjelasan singkat.
+- Baris 3: Kesimpulan/Insight/CTA.
 - JANGAN batasi karakter per tweet secara kaku (boleh lebih dari 240 karakter), tapi pastikan tetap padat dan berisi.
 - Setiap tweet WAJIB selesai dalam 1 ide yang tuntas.
 - WAJIB mengakhiri setiap tweet dengan tanda baca yang jelas: titik (.), seru (!), atau tanya (?).
 - Gunakan format "baris per baris" (line by line). Jangan buat paragraf panjang.
 - Gunakan double enter (dua kali enter) untuk memisahkan setiap poin atau kalimat agar teks terasa "bernafas" dan sangat enak dibaca di layar HP.
 - Gunakan bullet points yang menarik (seperti ✅, 📌, 🎯, 👉) untuk daftar, jangan gunakan bullet point standar.
-- Pecah kalimat yang panjang menjadi beberapa baris pendek agar ritme baca lebih enak.
 - Numbering otomatis (1/, 2/, 3/, dst) WAJIB ada di awal setiap tweet.
 - Pisahkan setiap post dengan garis "---" yang bersih.
 - JANGAN gunakan markdown bold atau italic berlebihan.

@@ -6,6 +6,7 @@ import {
   Copy, 
   Check, 
   Sparkles, 
+  BrainCircuit,
   Wrench, 
   Wallet, 
   ListOrdered, 
@@ -496,25 +497,25 @@ function App() {
 
   if (view === 'landing') {
     return (
-      <div className="min-h-screen bg-[#0A0A0B] text-white font-sans overflow-x-hidden selection:bg-[#1DA1F2]/30">
+      <div className="min-h-screen bg-[#0A0A0B] text-white font-sans overflow-x-hidden selection:bg-indigo-600/30">
         {/* Background Glow */}
         <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-          <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-[#1DA1F2]/5 blur-[120px] rounded-full" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-purple-500/5 blur-[120px] rounded-full" />
+          <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-indigo-600/5 blur-[120px] rounded-full" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-violet-500/5 blur-[120px] rounded-full" />
         </div>
 
         {/* Navigation */}
         <nav className="relative z-50 max-w-7xl mx-auto px-4 sm:px-6 h-20 sm:h-24 flex items-center justify-between">
           <div className="flex items-center gap-2 sm:gap-3">
-            <div className="bg-[#1DA1F2] p-1.5 sm:p-2 rounded-lg sm:rounded-xl">
-              <Twitter className="text-white w-5 h-5 sm:w-6 sm:h-6" />
+            <div className="bg-gradient-to-br from-indigo-600 to-violet-600 p-1.5 sm:p-2 rounded-lg sm:rounded-xl shadow-lg shadow-indigo-500/20">
+              <BrainCircuit className="text-white w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <span className="text-lg sm:text-xl font-black tracking-tighter uppercase">ThreadGen<span className="text-[#1DA1F2]">Pro</span></span>
+            <span className="text-lg sm:text-xl font-black tracking-tighter uppercase">ThreadGen<span className="text-indigo-600">Pro</span></span>
           </div>
           <div className="flex items-center gap-3 sm:gap-6">
             <button 
               onClick={handleGetAccess}
-              className="px-4 py-2 sm:px-6 sm:py-2.5 bg-[#1DA1F2] text-white rounded-xl text-xs sm:text-sm font-bold hover:bg-[#1a91da] transition-all flex items-center gap-2 shadow-lg shadow-blue-500/20"
+              className="px-4 py-2 sm:px-6 sm:py-2.5 bg-indigo-600 text-white rounded-xl text-xs sm:text-sm font-bold hover:bg-indigo-700 transition-all flex items-center gap-2 shadow-lg shadow-indigo-500/20"
             >
               <LogIn className="w-3.5 h-3.5 sm:w-4 h-4" /> {hasAccess ? 'Dashboard' : 'Login / Aktivasi'}
             </button>
@@ -537,10 +538,10 @@ function App() {
             <motion.div 
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-[#1DA1F2]/10 border border-[#1DA1F2]/20 rounded-full text-[#1DA1F2] text-[10px] sm:text-xs font-black uppercase tracking-widest mb-6 sm:mb-8"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600/10 border border-indigo-600/20 rounded-full text-indigo-600 text-[10px] sm:text-xs font-black uppercase tracking-widest mb-6 sm:mb-8"
             >
-              <Sparkles className="w-3 h-3" />
-              X & THREADS VIRAL ENGINE v2.5
+              <BrainCircuit className="w-3 h-3" />
+              AI THREAD ENGINE v3.0
             </motion.div>
             
             <motion.h1 
@@ -549,7 +550,7 @@ function App() {
               transition={{ delay: 0.1 }}
               className="text-4xl sm:text-5xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8"
             >
-              DOMINASI <span className="text-[#1DA1F2]">X</span> & <span className="text-purple-500">THREADS</span><br />TANPA KERJA KERAS.
+              DOMINASI <span className="text-indigo-600">X</span> & <span className="text-purple-500">THREADS</span><br />TANPA KERJA KERAS.
             </motion.h1>
             
             <motion.p 
@@ -569,7 +570,7 @@ function App() {
             >
               <button 
                 onClick={handleGetAccess}
-                className="group relative px-6 py-4 sm:px-10 sm:py-5 bg-[#1DA1F2] text-white font-black uppercase tracking-widest rounded-2xl text-base sm:text-lg hover:scale-105 transition-all flex items-center gap-3 shadow-[0_0_50px_rgba(29,161,242,0.4)]"
+                className="group relative px-6 py-4 sm:px-10 sm:py-5 bg-indigo-600 text-white font-black uppercase tracking-widest rounded-2xl text-base sm:text-lg hover:scale-105 transition-all flex items-center gap-3 shadow-[0_0_50px_rgba(79,70,229,0.4)]"
               >
                 {hasAccess ? 'MASUK KE DASHBOARD' : 'AMBIL AKSES SEKARANG'}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -604,8 +605,8 @@ function App() {
                   { icon: Zap, title: "Instant Result", desc: "Tidak perlu menunggu lama, hasil keluar dalam hitungan detik." }
                 ].map((feature, i) => (
                   <div key={i} className="bg-white/5 border border-white/10 p-6 sm:p-8 rounded-[24px] sm:rounded-[32px] hover:bg-white/10 transition-all group">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#1DA1F2]/10 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
-                      <feature.icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#1DA1F2]" />
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-600/10 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
+                      <feature.icon className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-600" />
                     </div>
                     <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3">{feature.title}</h3>
                     <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">{feature.desc}</p>
@@ -639,7 +640,7 @@ function App() {
                 </div>
               </div>
               <div className="relative">
-                <div className="absolute inset-0 bg-[#1DA1F2]/20 blur-[100px] rounded-full" />
+                <div className="absolute inset-0 bg-indigo-600/20 blur-[100px] rounded-full" />
                 <div className="relative bg-white/5 border border-white/10 p-8 rounded-[40px] backdrop-blur-xl">
                   <div className="space-y-4">
                     <div className="h-4 bg-white/10 rounded-full w-3/4" />
@@ -670,7 +671,7 @@ function App() {
                   { step: "03", title: "Copy & Viral", desc: "Salin hasilnya, posting, dan lihat engagement kamu meledak." }
                 ].map((item, i) => (
                   <div key={i} className="relative group">
-                    <div className="text-6xl sm:text-8xl font-black text-white/5 absolute -top-6 sm:-top-10 -left-2 sm:-left-4 group-hover:text-[#1DA1F2]/10 transition-colors">{item.step}</div>
+                    <div className="text-6xl sm:text-8xl font-black text-white/5 absolute -top-6 sm:-top-10 -left-2 sm:-left-4 group-hover:text-indigo-600/10 transition-colors">{item.step}</div>
                     <div className="relative space-y-3 sm:space-y-4">
                       <h3 className="text-xl sm:text-2xl font-bold">{item.title}</h3>
                       <p className="text-gray-400 text-sm sm:text-base leading-relaxed">{item.desc}</p>
@@ -715,7 +716,7 @@ function App() {
                       <Twitter className="w-8 h-8 sm:w-12 sm:h-12" />
                     </div>
                     <div className="flex items-center gap-3 sm:gap-4">
-                      <img src={testi.avatar} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-[#1DA1F2]" referrerPolicy="no-referrer" />
+                      <img src={testi.avatar} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-indigo-600" referrerPolicy="no-referrer" />
                       <div>
                         <p className="text-sm sm:text-base font-bold">{testi.name}</p>
                         <p className="text-[10px] sm:text-xs text-gray-500">Verified Member</p>
@@ -734,7 +735,7 @@ function App() {
               initial={{ scale: 0.9, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true }}
-              className="bg-gradient-to-br from-[#1DA1F2] to-blue-900 rounded-[32px] sm:rounded-[64px] p-8 sm:p-12 md:p-24 text-center relative overflow-hidden shadow-[0_0_120px_rgba(29,161,242,0.4)] border-4 sm:border-8 border-white/10"
+              className="bg-gradient-to-br from-indigo-600 to-violet-900 rounded-[32px] sm:rounded-[64px] p-8 sm:p-12 md:p-24 text-center relative overflow-hidden shadow-[0_0_120px_rgba(79,70,229,0.4)] border-4 sm:border-8 border-white/10"
             >
               <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
               <div className="absolute bottom-0 left-0 w-96 h-96 bg-black/30 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
@@ -798,7 +799,7 @@ function App() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={handleGetAccess}
-                    className="group w-full px-8 py-6 sm:px-12 sm:py-10 bg-white text-[#1DA1F2] font-black uppercase tracking-[0.2em] rounded-[30px] sm:rounded-[40px] text-xl sm:text-3xl shadow-[0_30px_100px_rgba(255,255,255,0.4)] flex flex-col items-center gap-2"
+                    className="group w-full px-8 py-6 sm:px-12 sm:py-10 bg-white text-indigo-600 font-black uppercase tracking-[0.2em] rounded-[30px] sm:rounded-[40px] text-xl sm:text-3xl shadow-[0_30px_100px_rgba(255,255,255,0.4)] flex flex-col items-center gap-2"
                   >
                     <span>{hasAccess ? 'MASUK KE DASHBOARD' : 'SAYA MAU AKSES PRO SEKARANG!'}</span>
                     <span className="text-xs sm:text-sm font-bold opacity-50 tracking-normal normal-case">Klik untuk lanjut ke Aktivasi Aman</span>
@@ -832,7 +833,7 @@ function App() {
               ].map((faq, i) => (
                 <div key={i} className="bg-white/5 border border-white/10 p-8 rounded-3xl space-y-4">
                   <h4 className="text-lg font-bold flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[#1DA1F2] rounded-full" />
+                    <div className="w-2 h-2 bg-indigo-600 rounded-full" />
                     {faq.q}
                   </h4>
                   <p className="text-gray-400 leading-relaxed">{faq.a}</p>
@@ -843,7 +844,7 @@ function App() {
 
           {/* Final CTA */}
           <section className="py-16 sm:py-32 text-center border-t border-white/5">
-            <h2 className="text-2xl sm:text-4xl md:text-6xl font-black mb-8 sm:mb-12">SIAP JADI RAJA <span className="text-[#1DA1F2]">X</span> & <span className="text-purple-500">THREADS</span>?</h2>
+            <h2 className="text-2xl sm:text-4xl md:text-6xl font-black mb-8 sm:mb-12">SIAP JADI RAJA <span className="text-indigo-600">X</span> & <span className="text-purple-500">THREADS</span>?</h2>
             <button 
               onClick={handleGetAccess}
               className="px-8 py-4 sm:px-12 sm:py-6 bg-white text-black font-black uppercase tracking-widest rounded-2xl text-base sm:text-xl hover:bg-gray-200 transition-all"
@@ -866,7 +867,7 @@ function App() {
       <div className="min-h-screen bg-[#0A0A0B] text-white flex items-center justify-center p-6 relative overflow-hidden">
         {/* Background Glow */}
         <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-          <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-[#1DA1F2]/5 blur-[120px] rounded-full" />
+          <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-indigo-600/5 blur-[120px] rounded-full" />
           <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-purple-500/5 blur-[120px] rounded-full" />
         </div>
 
@@ -954,7 +955,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] text-[#1A1A1A] font-sans selection:bg-[#1DA1F2]/10">
+    <div className="min-h-screen bg-[#F8F9FA] text-[#1A1A1A] font-sans selection:bg-indigo-600/10">
       <AnimatePresence>
         {showNotification && (
           <motion.div 
@@ -979,15 +980,15 @@ function App() {
       <header className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
           <div className="flex items-center gap-2 sm:gap-3 cursor-pointer" onClick={() => setView('landing')}>
-            <div className="bg-[#1DA1F2] p-2 sm:p-2.5 rounded-lg sm:rounded-xl shadow-lg shadow-blue-100">
-              <Twitter className="text-white w-5 h-5 sm:w-6 sm:h-6" />
+            <div className="bg-gradient-to-br from-indigo-600 to-violet-600 p-2 sm:p-2.5 rounded-lg sm:rounded-xl shadow-lg shadow-indigo-100">
+              <BrainCircuit className="text-white w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <span className="text-lg sm:text-xl font-black tracking-tighter uppercase">ThreadGen<span className="text-[#1DA1F2]">Pro</span></span>
+            <span className="text-lg sm:text-xl font-black tracking-tighter uppercase">ThreadGen<span className="text-indigo-600">Pro</span></span>
           </div>
           <div className="flex items-center gap-2 sm:gap-4">
             <div className="hidden sm:flex flex-col items-end mr-2">
               <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Status</span>
-              <span className="text-xs font-bold text-[#1DA1F2]">PRO MEMBER</span>
+              <span className="text-xs font-bold text-indigo-600">PRO MEMBER</span>
             </div>
             <div className="flex items-center gap-1 sm:gap-2">
               <button 
@@ -1022,13 +1023,13 @@ function App() {
             <div className="lg:hidden bg-white p-4 sm:p-6 rounded-[24px] sm:rounded-[32px] border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.02)] flex flex-col sm:flex-row items-center gap-4">
               <div className="flex-1 w-full space-y-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <Lock className="w-3 h-3 text-[#1DA1F2]" />
+                  <Lock className="w-3 h-3 text-indigo-600" />
                   <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Custom API Key</span>
                 </div>
                 <input 
                   type="password"
                   placeholder="Masukkan Gemini API Key Anda (Opsional)"
-                  className="w-full px-4 py-2.5 bg-gray-50 border-2 border-transparent focus:border-[#1DA1F2] focus:bg-white rounded-xl outline-none transition-all font-mono text-xs"
+                  className="w-full px-4 py-2.5 bg-gray-50 border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-xl outline-none transition-all font-mono text-xs"
                   value={userApiKey}
                   onChange={(e) => setUserApiKey(e.target.value)}
                 />
@@ -1036,7 +1037,7 @@ function App() {
               <div className="flex gap-2 w-full sm:w-auto pt-1 sm:pt-4">
                 <button 
                   onClick={() => saveApiKey(userApiKey)}
-                  className="flex-1 sm:flex-none px-6 py-2.5 bg-[#1DA1F2] text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:scale-[1.02] transition-all shadow-lg shadow-blue-500/10"
+                  className="flex-1 sm:flex-none px-6 py-2.5 bg-indigo-600 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:scale-[1.02] transition-all shadow-lg shadow-indigo-500/10"
                 >
                   Simpan
                 </button>
@@ -1068,7 +1069,7 @@ function App() {
                   <label className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-gray-400 ml-1">Topik Utama</label>
                   <textarea 
                     placeholder="Apa yang ingin kamu bahas hari ini?"
-                    className="w-full p-3 sm:p-4 bg-gray-50 border-2 border-transparent focus:border-[#1DA1F2] focus:bg-white rounded-xl sm:rounded-2xl transition-all min-h-[100px] sm:min-h-[120px] resize-none outline-none font-medium placeholder:text-gray-300 text-sm sm:text-base"
+                    className="w-full p-3 sm:p-4 bg-gray-50 border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-xl sm:rounded-2xl transition-all min-h-[100px] sm:min-h-[120px] resize-none outline-none font-medium placeholder:text-gray-300 text-sm sm:text-base"
                     value={params.topic}
                     onChange={(e) => setParams({...params, topic: e.target.value})}
                   />
@@ -1077,7 +1078,7 @@ function App() {
                 <button 
                   onClick={handleGenerate}
                   disabled={isGenerating || !params.topic}
-                  className="w-full py-4 sm:py-5 bg-[#1DA1F2] text-white font-black uppercase tracking-widest rounded-xl sm:rounded-2xl shadow-[0_20px_40px_rgba(29,161,242,0.2)] hover:shadow-[0_20px_40px_rgba(29,161,242,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:scale-100 disabled:shadow-none flex items-center justify-center gap-3 text-sm sm:text-base"
+                  className="w-full py-4 sm:py-5 bg-indigo-600 text-white font-black uppercase tracking-widest rounded-xl sm:rounded-2xl shadow-[0_20px_40px_rgba(79,70,229,0.2)] hover:shadow-[0_20px_40px_rgba(79,70,229,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:scale-100 disabled:shadow-none flex items-center justify-center gap-3 text-sm sm:text-base"
                 >
                   {isGenerating ? (
                     <>
@@ -1098,8 +1099,8 @@ function App() {
             {history.length > 0 && (
               <div className="bg-white p-6 sm:p-8 rounded-[24px] sm:rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100">
                 <div className="flex items-center gap-3 mb-6 sm:mb-8">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-50 rounded-xl flex items-center justify-center">
-                    <History className="w-4 h-4 sm:w-5 sm:h-5 text-[#1DA1F2]" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-indigo-50 rounded-xl flex items-center justify-center">
+                    <History className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
                   </div>
                   <div>
                     <h2 className="text-lg sm:text-xl font-bold">Riwayat</h2>
@@ -1144,7 +1145,7 @@ function App() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  className="bg-gradient-to-br from-[#1DA1F2] to-[#0d8bd9] p-6 sm:p-8 rounded-[24px] sm:rounded-[32px] shadow-[0_20px_40px_rgba(29,161,242,0.2)] text-white space-y-6"
+                  className="bg-gradient-to-br from-indigo-600 to-violet-600 p-6 sm:p-8 rounded-[24px] sm:rounded-[32px] shadow-[0_20px_40px_rgba(79,70,229,0.2)] text-white space-y-6"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center">
@@ -1216,13 +1217,13 @@ function App() {
             <div className="hidden lg:flex bg-white p-4 sm:p-6 rounded-[24px] sm:rounded-[32px] border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.02)] flex-col sm:flex-row items-center gap-4">
               <div className="flex-1 w-full space-y-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <Lock className="w-3 h-3 text-[#1DA1F2]" />
+                  <Lock className="w-3 h-3 text-indigo-600" />
                   <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Custom API Key</span>
                 </div>
                 <input 
                   type="password"
                   placeholder="Masukkan Gemini API Key Anda (Opsional)"
-                  className="w-full px-4 py-2.5 bg-gray-50 border-2 border-transparent focus:border-[#1DA1F2] focus:bg-white rounded-xl outline-none transition-all font-mono text-xs"
+                  className="w-full px-4 py-2.5 bg-gray-50 border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-xl outline-none transition-all font-mono text-xs"
                   value={userApiKey}
                   onChange={(e) => setUserApiKey(e.target.value)}
                 />
@@ -1230,7 +1231,7 @@ function App() {
               <div className="flex gap-2 w-full sm:w-auto pt-1 sm:pt-4">
                 <button 
                   onClick={() => saveApiKey(userApiKey)}
-                  className="flex-1 sm:flex-none px-6 py-2.5 bg-[#1DA1F2] text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:scale-[1.02] transition-all shadow-lg shadow-blue-500/10"
+                  className="flex-1 sm:flex-none px-6 py-2.5 bg-indigo-600 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:scale-[1.02] transition-all shadow-lg shadow-indigo-500/10"
                 >
                   Simpan
                 </button>
@@ -1248,8 +1249,8 @@ function App() {
 
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center">
-                  <Twitter className="w-5 h-5 text-[#1DA1F2]" />
+                <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center">
+                  <BrainCircuit className="w-5 h-5 text-indigo-600" />
                 </div>
                 <h2 className="text-lg sm:text-xl font-bold">Preview Utas (X & Threads)</h2>
               </div>
@@ -1260,7 +1261,7 @@ function App() {
                     navigator.clipboard.writeText(allText);
                     showToast('Seluruh thread disalin!');
                   }}
-                  className="text-xs font-black uppercase tracking-widest text-[#1DA1F2] hover:bg-blue-50 px-4 py-2 rounded-lg transition-all"
+                  className="text-xs font-black uppercase tracking-widest text-indigo-600 hover:bg-indigo-50 px-4 py-2 rounded-lg transition-all"
                 >
                   Copy All
                 </button>
@@ -1289,7 +1290,7 @@ function App() {
                     className="bg-white p-20 rounded-[40px] border-4 border-dashed border-gray-100 flex flex-col items-center justify-center text-center space-y-6"
                   >
                     <div className="w-20 h-20 bg-gray-50 rounded-[32px] flex items-center justify-center">
-                      <Twitter className="w-10 h-10 text-gray-200" />
+                      <BrainCircuit className="w-10 h-10 text-gray-200" />
                     </div>
                     <div className="space-y-2">
                       <p className="text-xl font-bold text-gray-400">Siap Viral?</p>
@@ -1315,7 +1316,7 @@ function App() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.05 }}
-                    className="bg-white p-6 sm:p-8 rounded-[24px] sm:rounded-[32px] shadow-[0_4px_20px_rgb(0,0,0,0.02)] border border-gray-100 group relative hover:border-[#1DA1F2]/30 transition-all"
+                    className="bg-white p-6 sm:p-8 rounded-[24px] sm:rounded-[32px] shadow-[0_4px_20px_rgb(0,0,0,0.02)] border border-gray-100 group relative hover:border-indigo-600/30 transition-all"
                   >
                     <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-10">
                       <button 
@@ -1326,7 +1327,7 @@ function App() {
                         className={`min-w-[44px] min-h-[44px] flex items-center justify-center gap-2 px-4 rounded-xl sm:rounded-2xl transition-all shadow-lg ${
                           copiedIndex === index 
                             ? 'bg-green-500 text-white' 
-                            : 'bg-[#1DA1F2] text-white hover:scale-105 active:scale-95'
+                            : 'bg-indigo-600 text-white hover:scale-105 active:scale-95'
                         }`}
                       >
                         {copiedIndex === index ? (
@@ -1361,7 +1362,7 @@ function App() {
                           <div className="mt-6 rounded-2xl overflow-hidden border border-gray-100 bg-gray-50 aspect-square max-w-[400px]">
                             {isGeneratingImage ? (
                               <div className="w-full h-full flex flex-col items-center justify-center gap-4 text-gray-400">
-                                <Loader2 className="w-8 h-8 animate-spin text-[#1DA1F2]" />
+                                <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
                                 <span className="text-[10px] font-black uppercase tracking-widest animate-pulse">Meracik Visual...</span>
                               </div>
                             ) : (
@@ -1377,7 +1378,7 @@ function App() {
 
                         <div className="mt-6 flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#1DA1F2]" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-indigo-600" />
                             <span className="text-[10px] font-black uppercase tracking-widest text-gray-300">
                               {tweet.length} Karakter
                             </span>
