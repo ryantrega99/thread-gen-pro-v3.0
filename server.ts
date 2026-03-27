@@ -21,14 +21,13 @@ GAYA PENULISAN (HUMAN-LIKE):
 PANJANG THREAD (WAJIB DIPATUHI):
 Sesuaikan jumlah tweet berdasarkan pilihan user:
 - PENDEK: 3 tweet
-  → Struktur: Situasi/Hook + 1 Isi + CTA/Insight
 - PANJANG: 7 tweet
-  → Struktur: Situasi/Hook + 5 Isi + CTA/Insight
+- REKOMENDASI: 3-10 tweet (Pilih jumlah yang paling pas buat topik ini)
 
-Jika user tidak menyebut panjang, gunakan SEDANG (5 tweet).
+Jika tidak disebutkan, default ke PENDEK (3 tweet).
 
 Tampilkan pilihan ini di awal output (sebagai metadata, sebelum tweet pertama):
-Panjang dipilih: [PENDEK/PANJANG] ([jumlah] tweet)
+Panjang dipilih: [PENDEK/PANJANG/REKOMENDASI] ([jumlah] tweet)
 
 TONE KHUSUS - INFLUENCER STYLE:
 Jika user memilih tone "INFLUENCER", gunakan gaya berikut:
@@ -54,25 +53,24 @@ STRUKTUR THREAD (UMUM):
 1. Hook (Post 1): Harus "menghentak". Gunakan angka, kontroversi ringan, atau janji hasil yang nyata. Hindari kata "Halo sobat X".
    - KHUSUS POST 1: Setelah teks tweet selesai, tambahkan baris baru dengan format:
      [GAMBAR]: [deskripsi visual singkat maksimal 15 kata, gaya flat illustration, bold colors, minimal, tanpa teks di dalam gambar, ukuran 1:1]
-2. Story/Problem (Post 2): Ceritakan masalah yang sering dihadapi audiens dengan gaya relatable.
-3. Solution Overview (Post 3): Kenapa cara ini beda dari yang lain.
-4. Detail/Tutorial (Post 4-7): Berikan daging (value). Gunakan bullet points, tapi jangan terlalu kaku. Masukkan opini pribadi atau "insider tips".
-5. Hidden Gems (Post 8): Sesuatu yang jarang orang tahu.
-6. Summary (Post 9): Rangkuman singkat yang actionable.
-7. Rekomendasi Produk & CTA (Post 10): 
+2. Isi/Value (Post 2 s/d n-1): Berikan daging (value). Gunakan bullet points, tapi jangan terlalu kaku. Masukkan opini pribadi atau "insider tips".
+3. Rekomendasi Produk & CTA (Post Terakhir): 
    - WAJIB sertakan minimal 3 rekomendasi barang/produk terkait topik ini.
    - Gaya bahasa: "Soft sell" banget. Seolah-olah kamu pakai sendiri dan beneran suka.
    - Contoh: "Btw, banyak yang nanya spill barangnya. Gue pake ini sih: [Nama Produk] karena [Alasan Jujur]. Cek aja sendiri."
    - Jangan pakai link placeholder jika tidak ada, cukup deskripsi produk yang menggoda.
 
 ATURAN FORMAT & VISUAL RHYTHM (SANGAT KETAT):
+- WAJIB: Setiap tweet HARUS terdiri dari TEPAT 3 BARIS teks (tidak kurang, tidak lebih).
+- Baris 1: Hook/Pernyataan pembuka.
+- Baris 2: Isi/Detail/Data.
+- Baris 3: Cliffhanger/Insight/CTA.
+- Gunakan format "baris per baris" (line by line). Jangan buat paragraf panjang.
+- Pisahkan setiap baris dengan double enter (dua kali enter) agar teks terasa "bernafas" dan sangat enak dibaca di layar HP.
 - JANGAN batasi karakter per tweet secara kaku (boleh lebih dari 240 karakter), tapi pastikan tetap padat dan berisi.
 - Setiap tweet WAJIB selesai dalam 1 ide yang tuntas.
 - WAJIB mengakhiri setiap tweet dengan tanda baca yang jelas: titik (.), seru (!), atau tanya (?).
-- Gunakan format "baris per baris" (line by line). Jangan buat paragraf panjang.
-- Gunakan double enter (dua kali enter) untuk memisahkan setiap poin atau kalimat agar teks terasa "bernafas" dan sangat enak dibaca di layar HP.
 - Gunakan bullet points yang menarik (seperti ✅, 📌, 🎯, 👉) untuk daftar, jangan gunakan bullet point standar.
-- Pecah kalimat yang panjang menjadi beberapa baris pendek agar ritme baca lebih enak.
 - Numbering otomatis (1/, 2/, 3/, dst) WAJIB ada di awal setiap tweet.
 - Pisahkan setiap post dengan garis "---" yang bersih.
 - JANGAN gunakan markdown bold atau italic berlebihan.
@@ -162,7 +160,8 @@ app.post("/api/generate", async (req, res) => {
 
   const lengthTweetCount = {
     'PENDEK': 3,
-    'PANJANG': 7
+    'PANJANG': 7,
+    'REKOMENDASI': '3-10'
   };
 
   const prompt = `BUAT THREAD VIRAL TENTANG: ${topic}

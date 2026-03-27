@@ -1080,24 +1080,25 @@ function App() {
 
                 <div className="space-y-2">
                   <label className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-gray-400 ml-1">Panjang Thread</label>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-3 gap-2">
                     {[
                       { id: 'PENDEK', label: 'PENDEK', desc: '3 Tweet' },
-                      { id: 'PANJANG', label: 'PANJANG', desc: '7 Tweet' }
+                      { id: 'PANJANG', label: 'PANJANG', desc: '7 Tweet' },
+                      { id: 'REKOMENDASI', label: 'REKOMENDASI', desc: 'AI Pilih' }
                     ].map((opt) => (
                       <button
                         key={opt.id}
                         onClick={() => setParams({ ...params, length: opt.id as any })}
-                        className={`p-3 rounded-xl border-2 transition-all text-left ${
+                        className={`p-2 rounded-xl border-2 transition-all text-left ${
                           params.length === opt.id 
                             ? 'border-indigo-600 bg-indigo-50' 
                             : 'border-gray-100 bg-gray-50 hover:border-gray-200'
                         }`}
                       >
-                        <p className={`text-xs font-black ${params.length === opt.id ? 'text-indigo-600' : 'text-gray-500'}`}>
+                        <p className={`text-[10px] font-black leading-tight ${params.length === opt.id ? 'text-indigo-600' : 'text-gray-500'}`}>
                           {opt.label}
                         </p>
-                        <p className="text-[10px] text-gray-400 font-bold">{opt.desc}</p>
+                        <p className="text-[9px] text-gray-400 font-bold">{opt.desc}</p>
                       </button>
                     ))}
                   </div>
