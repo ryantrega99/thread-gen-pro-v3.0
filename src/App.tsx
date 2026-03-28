@@ -27,6 +27,7 @@ import {
   Smartphone,
   Globe,
   Flame,
+  Split,
   LogOut,
   Hash,
   Calendar,
@@ -180,6 +181,7 @@ function App() {
   const [params, setParams] = useState<ThreadParams>({
     topic: '',
     length: 'PENDEK',
+    tone: 'SANTAI',
   });
   const [isGenerating, setIsGenerating] = useState(false);
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
@@ -190,7 +192,7 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [timeLeft, setTimeLeft] = useState(900); // 15 minutes in seconds
   const [slotsLeft, setSlotsLeft] = useState(3);
-  const [history, setHistory] = useState<{id: string, topic: string, length?: string, thread: string[], booster?: ViralBooster, timestamp: number}[]>([]);
+  const [history, setHistory] = useState<{id: string, topic: string, length?: string, tone?: string, thread: string[], booster?: ViralBooster, timestamp: number}[]>([]);
   const [userApiKey, setUserApiKey] = useState('');
 
   useEffect(() => {
@@ -294,6 +296,7 @@ function App() {
           id: doc.id,
           topic: data.topic,
           length: data.length,
+          tone: data.tone,
           thread: data.thread,
           booster: data.booster,
           timestamp: data.createdAt?.toMillis() || Date.now()
@@ -307,7 +310,7 @@ function App() {
     return () => unsubscribe();
   }, [user, isAuthReady]);
 
-  const saveToHistory = async (topic: string, length: string | undefined, thread: string[], booster?: ViralBooster) => {
+  const saveToHistory = async (topic: string, length: string | undefined, tone: string | undefined, thread: string[], booster?: ViralBooster) => {
     if (!user) return;
 
     const threadId = Date.now().toString();
@@ -318,6 +321,7 @@ function App() {
         uid: user.uid,
         topic,
         length: length || 'PENDEK',
+        tone: tone || 'SANTAI',
         thread,
         booster: booster || null,
         createdAt: serverTimestamp()
@@ -339,8 +343,12 @@ function App() {
     }
   };
 
-  const loadFromHistory = (item: {topic: string, length?: string, thread: string[], booster?: ViralBooster}) => {
-    setParams({ topic: item.topic, length: (item.length as any) || 'PENDEK' });
+  const loadFromHistory = (item: {topic: string, length?: string, tone?: string, thread: string[], booster?: ViralBooster}) => {
+    setParams({ 
+      topic: item.topic, 
+      length: (item.length as any) || 'PENDEK',
+      tone: (item.tone as any) || 'SANTAI'
+    });
     setThread(item.thread);
     setBooster(item.booster || null);
   };
@@ -408,7 +416,7 @@ function App() {
         const sanitizedTweets = (result.tweets || []).map(t => t.trim());
         setThread(sanitizedTweets);
         setBooster(result.booster || null);
-        saveToHistory(params.topic, params.length, sanitizedTweets, result.booster);
+        saveToHistory(params.topic, params.length, params.tone, sanitizedTweets, result.booster);
       }
     } catch (err: any) {
       const msg = err.message || 'Terjadi kesalahan sistem';
@@ -513,7 +521,7 @@ function App() {
             <div className="bg-gradient-to-br from-indigo-600 to-violet-600 p-1.5 sm:p-2 rounded-lg sm:rounded-xl shadow-lg shadow-indigo-500/20">
               <BrainCircuit className="text-white w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <span className="text-lg sm:text-xl font-black tracking-tighter uppercase">ThreadGen<span className="text-indigo-600">Pro</span></span>
+            <span className="text-lg sm:text-xl font-black tracking-tighter uppercase">Thread Gen<span className="text-indigo-600">Pro</span></span>
           </div>
           <div className="flex items-center gap-3 sm:gap-6">
             <button 
@@ -544,7 +552,7 @@ function App() {
               className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600/10 border border-indigo-600/20 rounded-full text-indigo-600 text-[10px] sm:text-xs font-black uppercase tracking-widest mb-6 sm:mb-8"
             >
               <BrainCircuit className="w-3 h-3" />
-              AI THREAD ENGINE v3.0
+              THREAD GEN PRO v10
             </motion.div>
             
             <motion.h1 
@@ -553,7 +561,7 @@ function App() {
               transition={{ delay: 0.1 }}
               className="text-4xl sm:text-5xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8"
             >
-              DOMINASI <span className="text-indigo-600">X</span> & <span className="text-purple-500">THREADS</span><br />TANPA KERJA KERAS.
+              KONTEN <span className="text-indigo-600">THREADS</span> VIRAL <br />DALAM <span className="text-purple-500">HITUNGAN</span> DETIK.
             </motion.h1>
             
             <motion.p 
@@ -562,7 +570,7 @@ function App() {
               transition={{ delay: 0.2 }}
               className="text-gray-400 text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed mb-12"
             >
-              Berhenti membuang waktu berjam-jam hanya untuk satu thread. Gunakan mesin viral kami yang menghasilkan konten "Anti-AI" yang dioptimalkan untuk X dan Threads dalam hitungan detik.
+              Berhenti pusing mikir konten. Gunakan asisten kreatif yang dirancang khusus untuk membuat Threads yang punchy, emosional, dan relatable.
             </motion.p>
 
             <motion.div 
@@ -600,7 +608,10 @@ function App() {
                 {[
                   { icon: Globe, title: "Multi-Platform", desc: "Satu kali generate, konten langsung siap untuk X dan Threads sekaligus." },
                   { icon: ShieldCheck, title: "100% Anti-AI", desc: "Gaya bahasa sangat manusiawi, menggunakan slang yang tepat, dan emosional." },
-                  { icon: Flame, title: "Viral Hook Engine", desc: "Dapatkan hook yang menghentak untuk memastikan orang berhenti scroll." },
+                  { icon: MessageCircle, title: "Anti-Ghosting V4", desc: "Teknik khusus untuk memancing interaksi dan memastikan thread kamu ramai reply." },
+                  { icon: Flame, title: "Roast Mode V5", desc: "Analisis tajam untuk konten yang kurang perform. Paste teksnya, kami perbaiki." },
+                  { icon: Split, title: "A/B Testing V11", desc: "Bandingkan dua versi konten dan temukan mana yang lebih berpotensi viral." },
+                  { icon: Users, title: "Collab Mode V15", desc: "Buat konten kolaborasi dengan kreator lain dalam satu alur cerita yang kuat." },
                   { icon: TrendingUp, title: "Growth Analytics", desc: "Struktur thread yang didesain untuk memaksimalkan retweet dan share." },
                   { icon: Smartphone, title: "Mobile Optimized", desc: "Tampilan dashboard yang sangat responsif, kerja dari mana saja." },
                   { icon: Lock, title: "Secure Access", desc: "Sistem login aman dengan kode akses eksklusif untuk setiap member." },
@@ -670,7 +681,7 @@ function App() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
                 {[
                   { step: "01", title: "Input Ide", desc: "Masukkan topik atau poin-poin kasar yang ada di kepala kamu." },
-                  { step: "02", title: "AI Magic", desc: "Mesin kami meracik hook, storytelling, dan struktur viral." },
+                  { step: "02", title: "AI Magic", desc: "Mesin kami meracik hook, storytelling, dan teknik Anti-Ghosting." },
                   { step: "03", title: "Copy & Viral", desc: "Salin hasilnya, posting, dan lihat engagement kamu meledak." }
                 ].map((item, i) => (
                   <div key={i} className="relative group">
@@ -858,7 +869,7 @@ function App() {
         </main>
 
         <footer className="max-w-7xl mx-auto px-6 py-20 text-center space-y-4 opacity-50">
-          <p className="text-sm font-bold">© 2026 ThreadGenPro. All Rights Reserved.</p>
+          <p className="text-sm font-bold">© 2026 Thread Gen Pro v10. All Rights Reserved.</p>
           <p className="text-[10px] font-black uppercase tracking-[0.5em]">Dibuat dengan ❤️ Ryant Kaya Raya</p>
         </footer>
       </div>
@@ -905,7 +916,7 @@ function App() {
               <Lock className="w-8 h-8 text-white" />
             </div>
             <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tighter">Aktivasi Akses</h2>
-            <p className="text-gray-400 text-sm sm:text-base">Masukkan kode akses untuk mulai menggunakan ThreadGenPro</p>
+            <p className="text-gray-400 text-sm sm:text-base">Masukkan kode akses untuk mulai menggunakan Thread Gen Pro v10</p>
           </div>
 
           <form onSubmit={handleVerifyCode} className="space-y-6">
@@ -986,7 +997,7 @@ function App() {
             <div className="bg-gradient-to-br from-indigo-600 to-violet-600 p-2 sm:p-2.5 rounded-lg sm:rounded-xl shadow-lg shadow-indigo-100">
               <BrainCircuit className="text-white w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <span className="text-lg sm:text-xl font-black tracking-tighter uppercase">ThreadGen<span className="text-indigo-600">Pro</span></span>
+            <span className="text-lg sm:text-xl font-black tracking-tighter uppercase">Thread Gen<span className="text-indigo-600">Pro</span></span>
           </div>
           <div className="flex items-center gap-2 sm:gap-4">
             <div className="hidden sm:flex flex-col items-end mr-2">
@@ -1062,34 +1073,80 @@ function App() {
                   <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
                 </div>
                 <div>
-                  <h2 className="text-lg sm:text-xl font-bold">Konfigurasi Konten</h2>
-                  <p className="text-xs sm:text-sm text-gray-400">Optimalkan untuk X & Threads</p>
+                  <h2 className="text-lg sm:text-xl font-bold">Thread Gen Pro v10</h2>
+                  <p className="text-xs sm:text-sm text-gray-400">Asisten Kreatif Threads Kamu</p>
                 </div>
               </div>
 
               <div className="space-y-4 sm:space-y-6">
                 <div className="space-y-2">
-                  <label className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-gray-400 ml-1">Topik Utama</label>
+                  <label className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-gray-400 ml-1">Bahan Konten</label>
                   <textarea 
-                    placeholder="Apa yang ingin kamu bahas hari ini?"
+                    placeholder="Contoh: 'roast ini [paste]', 'A/B test ini [paste A & B]', atau 'buatin konten collab sama @kreator'..."
                     className="w-full p-3 sm:p-4 bg-gray-50 border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-xl sm:rounded-2xl transition-all min-h-[100px] sm:min-h-[120px] resize-none outline-none font-medium placeholder:text-gray-300 text-sm sm:text-base"
                     value={params.topic}
                     onChange={(e) => setParams({...params, topic: e.target.value})}
                   />
+                  {!params.topic && (
+                    <div className="grid grid-cols-1 gap-2 mt-2">
+                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Belum punya ide? Coba ini:</p>
+                      {[
+                        "Pengalaman pribadi yang bikin kamu berubah",
+                        "Opini yang berbeda dari kebanyakan orang",
+                        "Kesalahan umum yang sering dilakukan orang",
+                        "Hal yang baru kamu sadari belakangan ini",
+                        "Cerita gagal tapi ada pelajarannya"
+                      ].map((suggestion, i) => (
+                        <button 
+                          key={i}
+                          onClick={() => setParams({...params, topic: suggestion})}
+                          className="text-left px-3 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg text-xs text-gray-500 transition-all border border-gray-100"
+                        >
+                          {i + 1}. {suggestion}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-gray-400 ml-1">Panjang Thread</label>
-                  <div className="grid grid-cols-3 gap-2">
+                  <label className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-gray-400 ml-1">Pilih Tone</label>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                     {[
-                      { id: 'PENDEK', label: 'PENDEK', desc: '3 Tweet' },
-                      { id: 'PANJANG', label: 'PANJANG', desc: '7 Tweet' },
-                      { id: 'REKOMENDASI', label: 'REKOMENDASI', desc: 'AI Pilih' }
+                      { id: 'GALAK', label: 'Galak', icon: Flame },
+                      { id: 'SANTAI', label: 'Santai', icon: MessageCircle },
+                      { id: 'MOTIVASI', label: 'Motivasi', icon: Sparkles },
+                      { id: 'HUMOR', label: 'Humor', icon: Zap }
+                    ].map((opt) => (
+                      <button
+                        key={opt.id}
+                        onClick={() => setParams({ ...params, tone: opt.id as any })}
+                        className={`p-2 rounded-xl border-2 transition-all flex flex-col items-center gap-1 ${
+                          params.tone === opt.id 
+                            ? 'border-indigo-600 bg-indigo-50' 
+                            : 'border-gray-100 bg-gray-50 hover:border-gray-200'
+                        }`}
+                      >
+                        <opt.icon className={`w-3 h-3 ${params.tone === opt.id ? 'text-indigo-600' : 'text-gray-400'}`} />
+                        <span className={`text-[9px] font-black uppercase ${params.tone === opt.id ? 'text-indigo-600' : 'text-gray-500'}`}>
+                          {opt.label}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-gray-400 ml-1">Pilih Format</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      { id: 'PENDEK', label: 'FORMAT A', desc: 'Pendek (3-5 Versi)' },
+                      { id: 'PANJANG', label: 'FORMAT B', desc: 'Panjang (Storytelling)' }
                     ].map((opt) => (
                       <button
                         key={opt.id}
                         onClick={() => setParams({ ...params, length: opt.id as any })}
-                        className={`p-2 rounded-xl border-2 transition-all text-left ${
+                        className={`p-3 rounded-xl border-2 transition-all text-left ${
                           params.length === opt.id 
                             ? 'border-indigo-600 bg-indigo-50' 
                             : 'border-gray-100 bg-gray-50 hover:border-gray-200'
@@ -1098,12 +1155,11 @@ function App() {
                         <p className={`text-[10px] font-black leading-tight ${params.length === opt.id ? 'text-indigo-600' : 'text-gray-500'}`}>
                           {opt.label}
                         </p>
-                        <p className="text-[9px] text-gray-400 font-bold">{opt.desc}</p>
+                        <p className="text-[10px] text-gray-400 mt-1">{opt.desc}</p>
                       </button>
                     ))}
                   </div>
                 </div>
-
                 <button 
                   onClick={handleGenerate}
                   disabled={isGenerating || !params.topic}

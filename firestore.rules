@@ -72,7 +72,7 @@ service cloud.firestore {
              data.uid is string && data.uid == request.auth.uid &&
              data.topic is string && data.topic.size() > 0 && data.topic.size() < 500 &&
              data.thread is list && data.thread.size() > 0 && data.thread.size() < 50 &&
-             (!('tone' in data) || data.tone is string) &&
+             (!('tone' in data) || (data.tone is string && data.tone in ['GALAK', 'SANTAI', 'MOTIVASI', 'HUMOR'])) &&
              (!('booster' in data) || data.booster is map) &&
              data.createdAt is timestamp;
     }

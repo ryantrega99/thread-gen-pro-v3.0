@@ -1,6 +1,7 @@
 export interface ThreadParams {
   topic: string;
   length?: 'PENDEK' | 'PANJANG' | 'REKOMENDASI';
+  tone?: 'GALAK' | 'SANTAI' | 'MOTIVASI' | 'HUMOR';
   apiKey?: string;
 }
 
